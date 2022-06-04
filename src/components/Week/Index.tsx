@@ -2,12 +2,15 @@ import React, { useRef } from "react";
 
 import { DateTime } from "luxon";
 import "./Week.css";
+import Day from "../Day/Index";
 
 type WeekProps = {
   dayOffset: number;
   weekNumber: number;
   year: number;
   month: number;
+  selectedDate: DateTime;
+  selectDate: (date: DateTime) => any;
 };
 
 function Week(props: WeekProps) {
@@ -34,7 +37,11 @@ function Week(props: WeekProps) {
   return (
     <div className="week">
       {weekTemplate.map((el) => (
-        <div className="date-cell">{el.toFormat("dd")}</div>
+        <Day
+          date={el}
+          selectDate={props.selectDate}
+          selectedDate={props.selectedDate}
+        />
       ))}
     </div>
   );

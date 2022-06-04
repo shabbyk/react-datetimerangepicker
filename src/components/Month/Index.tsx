@@ -7,6 +7,8 @@ import Week from "../Week/Index";
 type MonthProps = {
   month: number;
   year: number;
+  selectedDate: DateTime;
+  selectDate: (date: DateTime) => any;
 };
 
 function Month(props: MonthProps) {
@@ -27,6 +29,8 @@ function Month(props: MonthProps) {
         dayOffset={dayOfWeek}
         month={props.month}
         year={props.year}
+        selectedDate={props.selectedDate}
+        selectDate={props.selectDate}
       />
     );
   }

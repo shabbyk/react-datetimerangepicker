@@ -8,10 +8,19 @@ import CalendarControls from "../CalendarControls/Index";
 type CalendarProps = {
   month: number;
   year: number;
+  selectedDate: DateTime;
+  selectDate: (val: DateTime) => any;
 };
 
 function Calendar(props: CalendarProps) {
-  return <Month month={props.month} year={props.year} />;
+  return (
+    <Month
+      month={props.month}
+      year={props.year}
+      selectedDate={props.selectedDate}
+      selectDate={props.selectDate}
+    />
+  );
 }
 
 export default Calendar;

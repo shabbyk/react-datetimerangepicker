@@ -14,8 +14,10 @@ function init() {
 }
 
 function App() {
-  var initVals = init();
   const [currDateDetails, setCurrDate] = useState(init());
+  const [selectedDate, setSelectedDate] = useState(
+    DateTime.now().startOf("day")
+  );
 
   return (
     <div className="App">
@@ -26,7 +28,12 @@ function App() {
         monthName={currDateDetails.monthName}
         navigate={setCurrDate}
       />
-      <Calendar month={currDateDetails.month} year={currDateDetails.year} />
+      <Calendar
+        month={currDateDetails.month}
+        year={currDateDetails.year}
+        selectedDate={selectedDate}
+        selectDate={setSelectedDate}
+      />
     </div>
   );
 }

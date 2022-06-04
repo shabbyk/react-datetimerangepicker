@@ -3,31 +3,39 @@ import { DateTime } from "luxon";
 import "./Day.css";
 
 type DayProp = {
-  dayNumber: number;
+  date: DateTime;
+  selectedDate: DateTime;
+  selectDate: (date: DateTime) => any;
 };
 
-function onKeyDown() {}
+function getClassName(currElDate: DateTime, selectedDate: DateTime) {
+  var classNameString = "date-cell";
 
-function onClick() {}
+  if (+currElDate.toFormat("dd") == 4) {
+    debugger;
+  }
 
-function onMouseEnter() {}
+  if (currElDate.toMillis() == selectedDate.toMillis()) {
+    classNameString += " selected-date";
+  }
 
-function dayContent(dayNumber: number) {
-  return <div>{DateTime.now().plus({ day: dayNumber }).day}</div>;
+  return classNameString;
+}
+
+function dayContent(date: DateTime) {
+  return date.toFormat("dd");
 }
 
 function Day(props: DayProp) {
-  const eleRef = useRef(null);
-
   return (
     <div
-      ref={eleRef}
-      className={""}
-      onKeyDown={onKeyDown}
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
+      className={getClassName(props.date, props.selectedDate)}
+      onClick={(e) => {
+        props.selectDate(props.date.startOf("day"));
+        e.stopPropagation();
+      }}
     >
-      {dayContent(props.dayNumber)}
+      {dayContent(props.date)}
     </div>
   );
 }
