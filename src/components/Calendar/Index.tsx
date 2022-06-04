@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { DateTime } from "luxon";
 import "./Calendar.css";
 import Month from "../Month/Index";
-import CalendarControls from "../Calendar-controls/Index";
+import CalendarControls from "../CalendarControls/Index";
 
 type CalendarProps = {
   month: number;

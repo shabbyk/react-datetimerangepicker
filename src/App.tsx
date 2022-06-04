@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
-import React from "react";
+import React, { useState } from "react";
 
 import "./App.css";
-import CalendarControls from "./components/Calendar-controls/Index";
+import CalendarControls from "./components/CalendarControls/Index";
 import Calendar from "./components/Calendar/Index";
 
 function init() {
@@ -15,15 +15,18 @@ function init() {
 
 function App() {
   var initVals = init();
+  const [currDateDetails, setCurrDate] = useState(init());
+
   return (
     <div className="App">
       <input type="text" name="dates" className="" />
       <CalendarControls
-        month={initVals.month}
-        year={initVals.year}
-        monthName={initVals.monthName}
+        month={currDateDetails.month}
+        year={currDateDetails.year}
+        monthName={currDateDetails.monthName}
+        navigate={setCurrDate}
       />
-      <Calendar month={initVals.month} year={initVals.year} />
+      <Calendar month={currDateDetails.month} year={currDateDetails.year} />
     </div>
   );
 }
