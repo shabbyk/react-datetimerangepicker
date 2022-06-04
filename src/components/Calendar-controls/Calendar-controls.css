@@ -1,0 +1,12 @@
+.top-control-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.left::before {
+    content: '<';
+}
+
+.right::after {
+    content: '>';
+}

@@ -1,6 +1,6 @@
-import { DateTime } from "luxon";
 import React, { useRef } from "react";
-import Day from "../Day/Index";
+
+import { DateTime } from "luxon";
 import "./Week.css";
 
 type WeekProps = {

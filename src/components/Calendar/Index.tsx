@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { DateTime } from "luxon";
 import "./Calendar.css";
 import Month from "../Month/Index";
+import CalendarControls from "../Calendar-controls/Index";
 
 type CalendarProps = {
   month: number;
@@ -10,7 +11,6 @@ type CalendarProps = {
 };
 
 function Calendar(props: CalendarProps) {
-  const eleRef = useRef(null);
   return <Month month={props.month} year={props.year} />;
 }
 
