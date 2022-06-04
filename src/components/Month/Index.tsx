@@ -17,30 +17,14 @@ function Month(props: MonthProps) {
     month: props.month,
   });
 
-  let daysInCurrMonth = calenderObj.daysInMonth;
-  let firstDay = calenderObj.startOf("month");
-  let lastDay = calenderObj.endOf("month");
-  let lastMonth = calenderObj.minus({ month: 1 }).month;
-  let lastYear = calenderObj.minus({ year: 1 }).year; // If curr month is January
-  let daysInLastMonth = calenderObj.minus({ year: 1, month: 1 }).daysInMonth;
-  let dayOfWeek = calenderObj.startOf("month").day;
-  let localFirstDay = DateTime.local().startOf("month").day;
-
-  var startDay = daysInLastMonth - dayOfWeek + localFirstDay + 1;
-  if (startDay > daysInLastMonth) startDay -= 7;
-
-  if (dayOfWeek == localFirstDay) startDay = daysInLastMonth - 6;
-
-  var totalWeeks = Math.ceil(
-    (daysInCurrMonth + (daysInLastMonth - startDay)) / 7
-  );
+  let dayOfWeek = calenderObj.startOf("month").weekday;
 
   var monthTemplate = [];
-  for (var i = 1; i <= totalWeeks; i++) {
+  for (var i = 1; i <= 6; i++) {
     monthTemplate.push(
       <Week
         weekNumber={i}
-        dayOffset={daysInLastMonth - startDay}
+        dayOffset={dayOfWeek}
         month={props.month}
         year={props.year}
       />

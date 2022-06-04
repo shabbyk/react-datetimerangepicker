@@ -18,13 +18,13 @@ function Week(props: WeekProps) {
     month: props.month,
   });
 
-  if (props.weekNumber == 1) {
-    weekStartDate = weekStartDate.minus({ days: props.dayOffset });
-  } else {
+  if (props.weekNumber > 1) {
     weekStartDate = weekStartDate.plus({
-      days: (props.weekNumber - 1) * 7 + 1,
+      days: (props.weekNumber - 1) * 7,
     });
   }
+
+  weekStartDate = weekStartDate.minus({ days: props.dayOffset });
 
   var weekTemplate = [weekStartDate];
   for (var i = 1; i < 7; i++) {
