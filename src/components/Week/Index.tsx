@@ -1,20 +1,26 @@
+import { DateTime } from "luxon";
 import React, { useRef } from "react";
 import Day from "../Day/Index";
 import "./Week.css";
 
-const weekDays = [1, 2, 3, 4, 5];
-const weekEnds = [0, 6];
-const weekInNumbers = [weekEnds[0], ...weekDays, weekEnds[1]];
+type WeekProps = {
+  weekStartDate: DateTime;
+  weekNumber: number;
+};
 
-function Week() {
+function Week(props: WeekProps) {
   const eleRef = useRef(null);
+  var weekTemplate = [props.weekStartDate];
+  for (var i = 1; i < 7; i++) {
+    weekTemplate.push(weekTemplate[i - 1].plus({ hour: 24 }));
+  }
 
   return (
-    <div ref={eleRef}>
-      {weekInNumbers.map((value) => {
-        return <Day dayNumber={value} />;
-      })}
-    </div>
+    <>
+      {weekTemplate.map((el) => (
+        <div>{el.day}</div>
+      ))}
+    </>
   );
 }
 
