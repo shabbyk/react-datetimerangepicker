@@ -1,0 +1,7 @@
+.week {
+    display: flex;
+}
+
+.date-cell {
+    flex: 1;
+}

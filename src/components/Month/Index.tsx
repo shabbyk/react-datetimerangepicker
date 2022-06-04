@@ -37,10 +37,17 @@ function Month(props: MonthProps) {
 
   var monthTemplate = [];
   for (var i = 1; i <= totalWeeks; i++) {
-    monthTemplate.push(<Week weekNumber={i} weekStartDate={DateTime.now()} />);
+    monthTemplate.push(
+      <Week
+        weekNumber={i}
+        dayOffset={daysInLastMonth - startDay}
+        month={props.month}
+        year={props.year}
+      />
+    );
   }
 
-  return <>{monthTemplate}</>;
+  return <div className="month">{monthTemplate}</div>;
 }
 
 export default Month;
