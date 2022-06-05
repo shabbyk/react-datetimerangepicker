@@ -1,0 +1,23 @@
+.start-date {
+    background: rgba(0,128,128, 1);
+    color: white;
+}
+
+.in-range {
+    background: rgba(0,128,128, 0.3);
+}
+
+.date-cell {
+    flex: 1;
+    cursor: pointer;
+}
+
+.default-hover:hover {
+    background: rgb(202, 198, 198);
+}
+
+.ends {
+    background-color: #fff;
+    border-color: transparent;
+    color: #999;
+}

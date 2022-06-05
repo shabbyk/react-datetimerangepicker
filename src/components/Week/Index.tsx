@@ -14,12 +14,12 @@ type WeekProps = {
 };
 
 function Week(props: WeekProps) {
-  const eleRef = useRef(null);
-
   var weekStartDate = DateTime.fromObject({
     year: props.year,
     month: props.month,
   });
+
+  var currMonth = weekStartDate.month;
 
   if (props.weekNumber > 1) {
     weekStartDate = weekStartDate.plus({
@@ -41,6 +41,7 @@ function Week(props: WeekProps) {
           date={el}
           selectDate={props.selectDate}
           selectedDate={props.selectedDate}
+          currMonth={currMonth}
         />
       ))}
     </div>

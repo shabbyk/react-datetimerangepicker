@@ -1,12 +1,3 @@
 .week {
     display: flex;
 }
-
-.date-cell {
-    flex: 1;
-    cursor: pointer;
-}
-
-.selected-date {
-    background: gray;
-}
