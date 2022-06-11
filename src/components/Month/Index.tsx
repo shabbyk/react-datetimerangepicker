@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { DateTime } from "luxon";
 import "./Month.css";
@@ -12,7 +12,8 @@ type MonthProps = {
 };
 
 function Month(props: MonthProps) {
-  const eleRef = useRef(null);
+  const [hoveringOverMonth, setMonthHover] = useState(false);
+  const [currentHoverDay, setCurrentHoverDay] = useState();
 
   var calenderObj = DateTime.fromObject({
     year: props.year,
@@ -30,12 +31,33 @@ function Month(props: MonthProps) {
         month={props.month}
         year={props.year}
         selectedDate={props.selectedDate}
+        hoveringOverMonth={hoveringOverMonth}
         selectDate={props.selectDate}
       />
     );
   }
 
-  return <div className="month">{monthTemplate}</div>;
+  function handleHoverOn(e: any) {
+    setMonthHover(true);
+    // console.log(e);
+    e.stopPropagation();
+  }
+
+  function handleHoverOff(e: any) {
+    setMonthHover(false);
+    // console.log(e);
+    e.stopPropagation();
+  }
+
+  return (
+    <div
+      className="month"
+      onMouseEnter={handleHoverOn}
+      onMouseLeave={handleHoverOff}
+    >
+      {monthTemplate}
+    </div>
+  );
 }
 
 export default Month;

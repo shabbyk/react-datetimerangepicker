@@ -6,29 +6,23 @@ type DayProps = {
   date: DateTime;
   currMonth: number;
   selectedDate: DateTime;
+  hoveringOverMonth: boolean;
   selectDate: (date: DateTime) => any;
 };
 
 function getClassName(
   currElDate: DateTime,
   currMonth: number,
-  selectedDate: DateTime,
-  inRange: boolean
-) {
+  selectedDate: DateTime
+): string {
   var classNameString = "date-cell";
 
   if (currElDate.month != currMonth) {
     classNameString += " ends";
   }
 
-  if (inRange) {
-    classNameString += " in-range";
-  }
-
   if (currElDate.toMillis() == selectedDate.toMillis()) {
     classNameString += " start-date";
-  } else if (currElDate.toMillis() > selectedDate.toMillis()) {
-    classNameString += " in-select-range";
   } else {
     classNameString += " default-hover";
   }
@@ -47,32 +41,31 @@ function handleClick(e: any, props: DayProps) {
   e.stopPropagation();
 }
 
-function handleMouseEvents(
+function handleHoverOn(
   e: any,
   props: DayProps,
-  setState: (value: boolean) => any
+  setInrange: (value: boolean) => any
 ) {
   if (props.date.toMillis() > props.selectedDate.toMillis()) {
-    setState(true);
+    setInrange(true);
   } else {
-    setState(false);
+    setInrange(false);
   }
-  e.stopPropagation();
 }
 
 function Day(props: DayProps) {
   const [inRange, isInRange] = useState(false);
+  let classes = getClassName(props.date, props.currMonth, props.selectedDate);
+
+  if (props.hoveringOverMonth) {
+  }
+
   return (
     <div
-      className={getClassName(
-        props.date,
-        props.currMonth,
-        props.selectedDate,
-        inRange
-      )}
+      className={classes}
       onClick={(e) => handleClick(e, props)}
-      onMouseEnter={(e) => handleMouseEvents(e, props, isInRange)}
-      onMouseLeave={(e) => handleMouseEvents(e, props, isInRange)}
+      onMouseEnter={(e) => handleHoverOn(e, props, isInRange)}
+      onMouseLeave={(e) => handleHoverOff(e, props, isInRange)}
     >
       {dayContent(props.date)}
     </div>

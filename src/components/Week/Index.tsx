@@ -10,6 +10,7 @@ type WeekProps = {
   year: number;
   month: number;
   selectedDate: DateTime;
+  hoveringOverMonth: boolean;
   selectDate: (date: DateTime) => any;
 };
 
@@ -42,6 +43,7 @@ function Week(props: WeekProps) {
           selectDate={props.selectDate}
           selectedDate={props.selectedDate}
           currMonth={currMonth}
+          hoveringOverMonth={props.hoveringOverMonth}
         />
       ))}
     </div>
