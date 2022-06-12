@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
 
 import { DateTime } from "luxon";
+
 import "./Week.css";
 import Day from "../Day/Index";
+import { HoverProps } from "../../types/HoverProps";
 
 type WeekProps = {
   dayOffset: number;
@@ -10,7 +12,7 @@ type WeekProps = {
   year: number;
   month: number;
   selectedDate: DateTime;
-  hoveringOverMonth: boolean;
+  hoverProps: HoverProps;
   selectDate: (date: DateTime) => any;
 };
 
@@ -43,7 +45,7 @@ function Week(props: WeekProps) {
           selectDate={props.selectDate}
           selectedDate={props.selectedDate}
           currMonth={currMonth}
-          hoveringOverMonth={props.hoveringOverMonth}
+          hoverProps={props.hoverProps}
         />
       ))}
     </div>

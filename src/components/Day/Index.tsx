@@ -1,12 +1,15 @@
-import React, { MouseEventHandler, useRef, useState } from "react";
+import React, { useState } from "react";
+
 import { DateTime } from "luxon";
+
 import "./Day.css";
+import { HoverProps } from "../../types/HoverProps";
 
 type DayProps = {
   date: DateTime;
   currMonth: number;
   selectedDate: DateTime;
-  hoveringOverMonth: boolean;
+  hoverProps: HoverProps;
   selectDate: (date: DateTime) => any;
 };
 
@@ -17,11 +20,11 @@ function getClassName(
 ): string {
   var classNameString = "date-cell";
 
-  if (currElDate.month != currMonth) {
-    classNameString += " ends";
+  if (currElDate.month !== currMonth) {
+    classNameString += " filler-date";
   }
 
-  if (currElDate.toMillis() == selectedDate.toMillis()) {
+  if (currElDate.toMillis() === selectedDate.toMillis()) {
     classNameString += " start-date";
   } else {
     classNameString += " default-hover";
@@ -35,37 +38,30 @@ function dayContent(date: DateTime) {
 }
 
 function handleClick(e: any, props: DayProps) {
-  if (props.date.month == props.currMonth) {
+  if (props.date.month === props.currMonth) {
     props.selectDate(props.date.startOf("day"));
   }
   e.stopPropagation();
 }
 
-function handleHoverOn(
-  e: any,
-  props: DayProps,
-  setInrange: (value: boolean) => any
-) {
-  if (props.date.toMillis() > props.selectedDate.toMillis()) {
-    setInrange(true);
-  } else {
-    setInrange(false);
-  }
-}
-
 function Day(props: DayProps) {
-  const [inRange, isInRange] = useState(false);
   let classes = getClassName(props.date, props.currMonth, props.selectedDate);
 
-  if (props.hoveringOverMonth) {
+  if (props.hoverProps.hovering && props.hoverProps.date) {
+    if (
+      props.date.toMillis() > props.selectedDate.toMillis() &&
+      props.date.toMillis() < props.hoverProps.date.toMillis()
+    ) {
+      classes += " in-range";
+    }
   }
 
   return (
     <div
       className={classes}
+      data-date={props.date.toISO()}
+      data-isfiller={props.date.month !== props.currMonth}
       onClick={(e) => handleClick(e, props)}
-      onMouseEnter={(e) => handleHoverOn(e, props, isInRange)}
-      onMouseLeave={(e) => handleHoverOff(e, props, isInRange)}
     >
       {dayContent(props.date)}
     </div>
