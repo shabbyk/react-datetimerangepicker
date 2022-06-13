@@ -1,33 +1,69 @@
-import React, { useRef } from "react";
-import { DateTime } from "luxon";
-import "./Day.css";
+import React, { useState } from "react";
 
-type DayProp = {
-  dayNumber: number;
+import { DateTime } from "luxon";
+
+import "./Day.css";
+import { HoverProps } from "../../types/HoverProps";
+
+type DayProps = {
+  date: DateTime;
+  currMonth: number;
+  selectedDate: DateTime;
+  hoverProps: HoverProps;
+  selectDate: (date: DateTime) => any;
 };
 
-function onKeyDown() {}
+function getClassName(
+  currElDate: DateTime,
+  currMonth: number,
+  selectedDate: DateTime
+): string {
+  var classNameString = "date-cell";
 
-function onClick() {}
+  if (currElDate.month !== currMonth) {
+    classNameString += " filler-date";
+  }
 
-function onMouseEnter() {}
+  if (currElDate.toMillis() === selectedDate.toMillis()) {
+    classNameString += " start-date";
+  } else {
+    classNameString += " default-hover";
+  }
 
-function dayContent(dayNumber: number) {
-  return <div>{DateTime.now().plus({ day: dayNumber }).day}</div>;
+  return classNameString;
 }
 
-function Day(props: DayProp) {
-  const eleRef = useRef(null);
+function dayContent(date: DateTime) {
+  return date.toFormat("dd");
+}
+
+function handleClick(e: any, props: DayProps) {
+  if (props.date.month === props.currMonth) {
+    props.selectDate(props.date.startOf("day"));
+  }
+  e.stopPropagation();
+}
+
+function Day(props: DayProps) {
+  let classes = getClassName(props.date, props.currMonth, props.selectedDate);
+
+  if (props.hoverProps.hovering && props.hoverProps.date) {
+    if (
+      props.date.toMillis() > props.selectedDate.toMillis() &&
+      props.date.toMillis() < props.hoverProps.date.toMillis()
+    ) {
+      classes += " in-range";
+    }
+  }
 
   return (
     <div
-      ref={eleRef}
-      className={""}
-      onKeyDown={onKeyDown}
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
+      className={classes}
+      data-date={props.date.toISO()}
+      data-isfiller={props.date.month !== props.currMonth}
+      onClick={(e) => handleClick(e, props)}
     >
-      {dayContent(props.dayNumber)}
+      {dayContent(props.date)}
     </div>
   );
 }
