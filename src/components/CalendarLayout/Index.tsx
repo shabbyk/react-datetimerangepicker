@@ -4,6 +4,7 @@ import { DateTime } from "luxon";
 
 import Calendar from "../Calendar/Index";
 import CalendarControls from "../CalendarControls/Index";
+import TimePicker from "../TimePicker/Index";
 
 type CalendarLayoutProps = {
   closeFn: (show: boolean) => any;
@@ -29,7 +30,6 @@ function CalendarLayout(props: CalendarLayoutProps) {
   const [selectedDate, setSelectedDate] = useState(
     DateTime.now().startOf("day")
   );
-  const { innerWidth, innerHeight } = window;
   const appRef = useRef(null);
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -59,6 +59,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
         selectedDate={selectedDate}
         selectDate={setSelectedDate}
       />
+      <TimePicker />
     </div>
   );
 }
