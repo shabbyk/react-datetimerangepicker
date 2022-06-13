@@ -2,6 +2,7 @@ import * as React from 'react';
 
 type MinutesPickerProps = {
     increment: number;
+    selected: number;
 }
 
 function MinutesPicker(props: MinutesPickerProps) {
@@ -11,7 +12,7 @@ function MinutesPicker(props: MinutesPickerProps) {
     }
     return (<div className="minutes-picker-container">
         <label>mm:</label>
-        <select>{options}</select>
+        <select defaultValue={props.selected}>{options}</select>
     </div>);
 }
 

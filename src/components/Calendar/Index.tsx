@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import { DateTime } from "luxon";
+
 import "./Calendar.css";
 import Month from "../Month/Index";
-import CalendarControls from "../CalendarControls/Index";
 
 type CalendarProps = {
   month: number;

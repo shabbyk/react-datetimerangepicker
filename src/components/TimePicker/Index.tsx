@@ -3,11 +3,17 @@ import HourPicker from './HoursPicker/Index';
 import MinutesPicker from './MinutesPicker/Index';
 import SecondsPicker from './SecondsPicker/Index';
 
-function TimePicker() {
+type TimePickerProps = {
+    selectedHour: number;
+    selectedMinute: number;
+    selectedSecond: number;
+}
+
+function TimePicker(props: TimePickerProps) {
     return ( <div className='timepicker'>
-        <HourPicker is24Format />
-        <MinutesPicker increment={5} />
-        <SecondsPicker />
+        <HourPicker is24Format selected={props.selectedHour}/>
+        <MinutesPicker increment={1} selected={props.selectedMinute}/>
+        <SecondsPicker selected={props.selectedSecond}/>
     </div> );
 }
 

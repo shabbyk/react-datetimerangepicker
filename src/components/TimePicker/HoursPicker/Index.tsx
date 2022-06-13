@@ -2,6 +2,7 @@ import React from 'react';
 
 type HourPickerProps = {
     is24Format: boolean;
+    selected: number;
 }
 
 function HourPicker(props: HourPickerProps) {
@@ -15,7 +16,7 @@ function HourPicker(props: HourPickerProps) {
 
     return (<div className="hour-picker-container">
         <label>HH:</label>
-        <select className="hour-picker">{options}</select>
+        <select className="hour-picker" defaultValue={props.selected}>{options}</select>
     </div>);
 }
 

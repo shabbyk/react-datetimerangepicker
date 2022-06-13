@@ -7,26 +7,23 @@ import CalendarControls from "../CalendarControls/Index";
 import TimePicker from "../TimePicker/Index";
 
 type CalendarLayoutProps = {
+  width: number;
+  selectedDate: DateTime;
   closeFn: (show: boolean) => any;
 };
 
-function init() {
-  return {
-    year: +DateTime.now().toFormat("yyyy"),
-    month: +DateTime.now().toFormat("MM"),
-    monthName: DateTime.now().monthShort,
-  };
-}
-
 function handleOutsideClick(ref: any, e: any, closeFn: (show: boolean) => any) {
-  debugger;
   if (ref.current && !ref.current.contains(e.target)) {
     closeFn(false);
   }
 }
 
 function CalendarLayout(props: CalendarLayoutProps) {
-  const [currDateDetails, setCurrDate] = useState(init());
+  const [currDateDetails, setCurrDate] = useState({
+    year: +props.selectedDate.toFormat("yyyy"),
+    month: +props.selectedDate.toFormat("MM"),
+    monthName: props.selectedDate.monthShort,
+  });
   const [selectedDate, setSelectedDate] = useState(
     DateTime.now().startOf("day")
   );
@@ -44,7 +41,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
     <div
       ref={appRef}
       style={{
-        width: 200,
+        width: props.width,
       }}
     >
       <CalendarControls
@@ -59,7 +56,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
         selectedDate={selectedDate}
         selectDate={setSelectedDate}
       />
-      <TimePicker />
+      <TimePicker selectedHour={props.selectedDate.hour} selectedMinute={props.selectedDate.minute} selectedSecond={props.selectedDate.second} />
     </div>
   );
 }
