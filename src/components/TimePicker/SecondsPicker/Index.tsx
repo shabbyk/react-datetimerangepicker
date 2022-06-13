@@ -4,7 +4,7 @@ import { DateTime } from "luxon";
 
 type SecondsPickerProps = {
   selected: number;
-  setDate: (date: DateTime) => any;
+  setSecond: (sec: number) => any;
 };
 
 function SecondsPicker(props: SecondsPickerProps) {
@@ -19,7 +19,12 @@ function SecondsPicker(props: SecondsPickerProps) {
   return (
     <div className="seconds-picker-container">
       <label>ss:</label>
-      <select defaultValue={props.selected}>{options}</select>
+      <select
+        defaultValue={props.selected}
+        onChange={(e) => props.setSecond(+e.target.value)}
+      >
+        {options}
+      </select>
     </div>
   );
 }

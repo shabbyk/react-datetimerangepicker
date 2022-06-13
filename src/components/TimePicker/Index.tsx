@@ -14,19 +14,20 @@ type TimePickerProps = {
 };
 
 function TimePicker(props: TimePickerProps) {
+  function setHour(hour: number) {}
+
+  function setMinute(min: number) {}
+
+  function setSecond(sec: number) {}
   return (
     <div className="timepicker">
-      <HourPicker
-        is24Format
-        selected={props.selectedHour}
-        setDate={props.setDate}
-      />
+      <HourPicker is24Format selected={props.selectedHour} setHour={setHour} />
       <MinutesPicker
         increment={1}
         selected={props.selectedMinute}
-        setDate={props.setDate}
+        setMinute={setMinute}
       />
-      <SecondsPicker selected={props.selectedSecond} setDate={props.setDate} />
+      <SecondsPicker selected={props.selectedSecond} setSecond={setSecond} />
     </div>
   );
 }

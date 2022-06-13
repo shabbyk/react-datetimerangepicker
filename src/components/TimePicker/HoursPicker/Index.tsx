@@ -1,11 +1,9 @@
 import React from "react";
 
-import { DateTime } from "luxon";
-
 type HourPickerProps = {
   is24Format: boolean;
   selected: number;
-  setDate: (date: DateTime) => any;
+  setHour: (hour: number) => any;
 };
 
 function HourPicker(props: HourPickerProps) {
@@ -24,7 +22,11 @@ function HourPicker(props: HourPickerProps) {
   return (
     <div className="hour-picker-container">
       <label>HH:</label>
-      <select className="hour-picker" defaultValue={props.selected}>
+      <select
+        className="hour-picker"
+        defaultValue={props.selected}
+        onChange={(e) => props.setHour(+e.target.value)}
+      >
         {options}
       </select>
     </div>

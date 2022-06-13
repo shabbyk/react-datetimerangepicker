@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 type MinutesPickerProps = {
   increment: number;
   selected: number;
-  setDate: (date: DateTime) => any;
+  setMinute: (min: number) => any;
 };
 
 function MinutesPicker(props: MinutesPickerProps) {
@@ -20,7 +20,12 @@ function MinutesPicker(props: MinutesPickerProps) {
   return (
     <div className="minutes-picker-container">
       <label>mm:</label>
-      <select defaultValue={props.selected}>{options}</select>
+      <select
+        defaultValue={props.selected}
+        onChange={(e) => props.setMinute(+e.target.value)}
+      >
+        {options}
+      </select>
     </div>
   );
 }
