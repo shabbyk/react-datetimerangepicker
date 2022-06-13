@@ -11,7 +11,7 @@ type AppProps = {
 
 function LeftCalendar(props: AppProps) {
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(DateTime.now());
+  const [selectedDate, selectDate] = useState(DateTime.now());
 
   return (
     <div className="left-calendar">
@@ -24,7 +24,14 @@ function LeftCalendar(props: AppProps) {
         value={selectedDate.toFormat(props.dateFormat)}
         onFocus={(e) => setShowPopup(true)}
       />
-      {showPopup && <CalendarLayout closeFn={setShowPopup} width={200} selectedDate={selectedDate}/>}
+      {showPopup && (
+        <CalendarLayout
+          closeFn={setShowPopup}
+          width={200}
+          selectedDate={selectedDate}
+          selectDate={selectDate}
+        />
+      )}
     </div>
   );
 }

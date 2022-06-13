@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import { DateTime } from "luxon";
 import "./CalendarControls.css";
@@ -7,13 +7,13 @@ type CalendarProps = {
   monthName: string;
   month: number;
   year: number;
-  navigate: ({year}: any) => any;
+  navigate: ({ year }: any) => any;
 };
 
 function increaseMonth(
   month: number,
   year: number,
-  callback: ({year}: any) => any
+  callback: ({ year }: any) => any
 ) {
   var changedDate = DateTime.fromObject({ year: year, month: month });
   changedDate = changedDate.plus({ month: 1 });
@@ -27,7 +27,7 @@ function increaseMonth(
 function decreaseMonth(
   month: number,
   year: number,
-  callback: ({year}: any) => any
+  callback: ({ year }: any) => any
 ) {
   var changedDate = DateTime.fromObject({ year: year, month: month });
   changedDate = changedDate.minus({ month: 1 });

@@ -10,6 +10,7 @@ type CalendarLayoutProps = {
   width: number;
   selectedDate: DateTime;
   closeFn: (show: boolean) => any;
+  setDate: (date: DateTime) => any;
 };
 
 function handleOutsideClick(ref: any, e: any, closeFn: (show: boolean) => any) {
@@ -24,9 +25,6 @@ function CalendarLayout(props: CalendarLayoutProps) {
     month: +props.selectedDate.toFormat("MM"),
     monthName: props.selectedDate.monthShort,
   });
-  const [selectedDate, setSelectedDate] = useState(
-    DateTime.now().startOf("day")
-  );
   const appRef = useRef(null);
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -53,10 +51,15 @@ function CalendarLayout(props: CalendarLayoutProps) {
       <Calendar
         month={currDateDetails.month}
         year={currDateDetails.year}
-        selectedDate={selectedDate}
-        selectDate={setSelectedDate}
+        selectedDate={props.selectedDate}
+        selectDate={props.setDate}
       />
-      <TimePicker selectedHour={props.selectedDate.hour} selectedMinute={props.selectedDate.minute} selectedSecond={props.selectedDate.second} />
+      <TimePicker
+        selectedHour={props.selectedDate.hour}
+        selectedMinute={props.selectedDate.minute}
+        selectedSecond={props.selectedDate.second}
+        setDate={props.setDate}
+      />
     </div>
   );
 }

@@ -48,7 +48,6 @@ function Month(props: MonthProps) {
       date: DateTime.fromISO(e.target.dataset.date),
     });
 
-    // console.log(e);
     e.stopPropagation();
   }
 
