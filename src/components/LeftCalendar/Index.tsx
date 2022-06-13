@@ -11,7 +11,7 @@ type AppProps = {
 
 function LeftCalendar(props: AppProps) {
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedDate, selectDate] = useState(DateTime.now());
+  const [selectedDate, setDate] = useState(DateTime.now());
 
   return (
     <div className="left-calendar">
@@ -29,7 +29,7 @@ function LeftCalendar(props: AppProps) {
           closeFn={setShowPopup}
           width={200}
           selectedDate={selectedDate}
-          selectDate={selectDate}
+          setDate={setDate}
         />
       )}
     </div>
