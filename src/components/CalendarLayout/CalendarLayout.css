@@ -1,0 +1,8 @@
+.calendar-layout {
+    display: flex;
+}
+
+.calendar-layout .left-control-container, .calendar-layout .right-control-container {
+    display: flex;
+    justify-content: space-evenly;
+}

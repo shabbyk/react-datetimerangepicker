@@ -1,0 +1,7 @@
+.right {
+    cursor: pointer;
+}
+
+.right::after {
+    content: '>';
+}
