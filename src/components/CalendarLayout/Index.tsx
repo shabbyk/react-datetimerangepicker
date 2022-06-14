@@ -49,19 +49,36 @@ function CalendarLayout(props: CalendarLayoutProps) {
         monthName={currDateDetails.monthName}
         navigate={setCurrDate}
       />
-      <Calendar
-        month={currDateDetails.month}
-        year={currDateDetails.year}
-        selectedDate={props.selectedDate.startOf("day")}
-        selectDate={props.setDate}
-      />
-      <TimePicker
-        selectedDate={props.selectedDate}
-        selectedHour={props.selectedDate.hour}
-        selectedMinute={props.selectedDate.minute}
-        selectedSecond={props.selectedDate.second}
-        setDate={props.setDate}
-      />
+      <div className="left-calendar">
+        <Calendar
+          month={currDateDetails.month}
+          year={currDateDetails.year}
+          selectedDate={props.selectedDate.startOf("day")}
+          selectDate={props.setDate}
+        />
+        <TimePicker
+          selectedDate={props.selectedDate}
+          selectedHour={props.selectedDate.hour}
+          selectedMinute={props.selectedDate.minute}
+          selectedSecond={props.selectedDate.second}
+          setDate={props.setDate}
+        />
+      </div>
+      <div className="right-calendar">
+        <Calendar
+          month={currDateDetails.month + 1}
+          year={currDateDetails.year}
+          selectedDate={props.selectedDate.startOf("day")}
+          selectDate={props.setDate}
+        />
+        <TimePicker
+          selectedDate={props.selectedDate}
+          selectedHour={props.selectedDate.hour}
+          selectedMinute={props.selectedDate.minute}
+          selectedSecond={props.selectedDate.second}
+          setDate={props.setDate}
+        />
+      </div>
     </div>
   );
 }

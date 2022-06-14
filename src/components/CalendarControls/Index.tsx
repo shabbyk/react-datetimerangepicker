@@ -38,15 +38,12 @@ function decreaseMonth(
   });
 }
 
-function CalendarControls(props: CalendarProps) {
+function CalendarControlsLeft(props: CalendarProps) {
   return (
     <div className="top-control-container">
-      <div
-        className="left"
-        onClick={() => decreaseMonth(props.month, props.year, props.navigate)}
-      ></div>
+      
       <div className="centre">
-        {props.monthName}/{props.year}
+        {props.monthName + 1}/{props.year}
       </div>
       <div
         className="right"

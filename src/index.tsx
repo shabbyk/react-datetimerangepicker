@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ReactDateTimeRangePicker dateFormat='dd/MM/yyyy hh:mm:ss' width={200}/>
+    <ReactDateTimeRangePicker dateFormat='dd/MM/yyyy hh:mm:ss' width={200} dateRangePicker/>
   </React.StrictMode>
 );
 

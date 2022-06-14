@@ -1,3 +1,10 @@
 .rdtrp-container {
     display: flex;
+    position: relative;
+}
+
+.rdtrp-container .calendar-popup {
+    display: flex;
+    position: absolute;
+    top: 25px;
 }
