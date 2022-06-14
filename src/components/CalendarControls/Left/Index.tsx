@@ -1,13 +1,15 @@
-function CalendarControlsLeft() {
-    return <>
-        <div
-            className="left"
-            onClick={() => decreaseMonth(props.month, props.year, props.navigate)}
-        ></div>
-        <div className="centre">
-            {props.monthName}/{props.year}
-        </div>
-    </>;
+import React from "react";
+import { CalendarControlProps } from "../../../types/CalendarControlProps";
+
+function CalendarControlLeft(props: CalendarControlProps) {
+  return (
+    <>
+      <div className="left" onClick={() => props.decreaseMonth()}></div>
+      <div className="centre">
+        {props.monthName}/{props.year}
+      </div>
+    </>
+  );
 }
 
-export default CalendarControlsLeft;
+export default CalendarControlLeft;

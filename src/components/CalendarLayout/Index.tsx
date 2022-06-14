@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { DateTime } from "luxon";
 
 import Calendar from "../Calendar/Index";
-import CalendarControls from "../CalendarControls/Index";
 import TimePicker from "../TimePicker/Index";
+import CalendarControlLeft from "../CalendarControls/Left/Index";
+import CalendarControlRight from "../CalendarControls/Right/Right";
 
 type CalendarLayoutProps = {
   width: number;
@@ -20,11 +21,6 @@ function handleOutsideClick(ref: any, e: any, closeFn: (show: boolean) => any) {
 }
 
 function CalendarLayout(props: CalendarLayoutProps) {
-  const [currDateDetails, setCurrDate] = useState({
-    year: +props.selectedDate.toFormat("yyyy"),
-    month: +props.selectedDate.toFormat("MM"),
-    monthName: props.selectedDate.monthShort,
-  });
   const appRef = useRef(null);
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -43,13 +39,8 @@ function CalendarLayout(props: CalendarLayoutProps) {
         width: props.width,
       }}
     >
-      <CalendarControls
-        month={currDateDetails.month}
-        year={currDateDetails.year}
-        monthName={currDateDetails.monthName}
-        navigate={setCurrDate}
-      />
       <div className="left-calendar">
+        <CalendarControlLeft />
         <Calendar
           month={currDateDetails.month}
           year={currDateDetails.year}
@@ -65,6 +56,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
         />
       </div>
       <div className="right-calendar">
+        <CalendarControlRight />
         <Calendar
           month={currDateDetails.month + 1}
           year={currDateDetails.year}
