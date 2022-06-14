@@ -56,6 +56,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
         selectDate={props.setDate}
       />
       <TimePicker
+        selectedDate={props.selectedDate}
         selectedHour={props.selectedDate.hour}
         selectedMinute={props.selectedDate.minute}
         selectedSecond={props.selectedDate.second}

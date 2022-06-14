@@ -8,6 +8,7 @@ import SecondsPicker from "./SecondsPicker/Index";
 import "./TimePicker.css";
 
 type TimePickerProps = {
+  selectedDate: DateTime;
   selectedHour: number;
   selectedMinute: number;
   selectedSecond: number;
@@ -15,11 +16,17 @@ type TimePickerProps = {
 };
 
 function TimePicker(props: TimePickerProps) {
-  function setHour(hour: number) {}
+  function setHour(hour: number) {
+    props.setDate(props.selectedDate.set({ hour: hour }));
+  }
 
-  function setMinute(min: number) {}
+  function setMinute(min: number) {
+    props.setDate(props.selectedDate.set({ minute: min }));
+  }
 
-  function setSecond(sec: number) {}
+  function setSecond(sec: number) {
+    props.setDate(props.selectedDate.set({ second: sec }));
+  }
   return (
     <div className="timepicker">
       <HourPicker is24Format selected={props.selectedHour} setHour={setHour} />
