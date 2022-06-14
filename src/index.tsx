@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import LeftCalendar from './components/LeftCalendar/Index';
 import './index.css';
+import ReactDateTimeRangePicker from './ReactDateTimeRangePicker';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <LeftCalendar dateFormat='dd/MM/yyyy hh:mm:ss'/>
+    <ReactDateTimeRangePicker dateFormat='dd/MM/yyyy hh:mm:ss' width={200}/>
   </React.StrictMode>
 );
 

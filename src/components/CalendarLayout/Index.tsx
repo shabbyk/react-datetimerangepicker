@@ -51,7 +51,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
       <Calendar
         month={currDateDetails.month}
         year={currDateDetails.year}
-        selectedDate={props.selectedDate}
+        selectedDate={props.selectedDate.startOf("day")}
         selectDate={props.setDate}
       />
       <TimePicker

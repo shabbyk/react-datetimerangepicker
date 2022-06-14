@@ -2,29 +2,29 @@ import React, { useState } from "react";
 
 import { DateTime } from "luxon";
 
-import "./LeftCalendar.css";
+import "./RightCalendar.css";
 import CalendarLayout from "../CalendarLayout/Index";
 
-type LeftCalendarProps = {
+type RightCalendarProps = {
   dateFormat: string;
   width: number;
 };
 
-function LeftCalendar(props: LeftCalendarProps) {
+function RightCalendar(props: RightCalendarProps) {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedDate, setDate] = useState(DateTime.now());
 
   return (
-    <div className="left-calendar">
+    <div className="right-calendar">
       <input
         type="text"
         name="dates"
         className=""
-        title="left-calendar-input"
+        title="right-calendar-input"
         placeholder="selected date..."
+        style={{ width: props.width }}
         value={selectedDate.toFormat(props.dateFormat)}
         onFocus={(e) => setShowPopup(true)}
-        style={{ width: props.width }}
       />
       {showPopup && (
         <CalendarLayout
@@ -38,4 +38,4 @@ function LeftCalendar(props: LeftCalendarProps) {
   );
 }
 
-export default LeftCalendar;
+export default RightCalendar;
