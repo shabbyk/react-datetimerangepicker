@@ -37,6 +37,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
   });
   return (
     <div
+      className="calendar-layout"
       ref={appRef}
       style={{
         width: props.width,

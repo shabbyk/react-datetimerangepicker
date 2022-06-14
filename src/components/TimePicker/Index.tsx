@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 import HourPicker from "./HoursPicker/Index";
 import MinutesPicker from "./MinutesPicker/Index";
 import SecondsPicker from "./SecondsPicker/Index";
+import "./TimePicker.css";
 
 type TimePickerProps = {
   selectedHour: number;
