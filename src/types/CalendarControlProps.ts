@@ -1,6 +1,6 @@
 export type CalendarControlProps = {
     monthName: string;
     year: number;
-    decreaseMonth: () => any;
-    increaseMonth: () => any;
+    decreaseMonth?: () => any;
+    increaseMonth?: () => any;
 }

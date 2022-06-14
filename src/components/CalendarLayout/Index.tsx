@@ -40,10 +40,14 @@ function CalendarLayout(props: CalendarLayoutProps) {
       }}
     >
       <div className="left-calendar">
-        <CalendarControlLeft />
+        <CalendarControlLeft
+          increaseMonth={() => {}}
+          monthName="test"
+          year={2002}
+        />
         <Calendar
-          month={currDateDetails.month}
-          year={currDateDetails.year}
+          month={props.selectedDate.month}
+          year={props.selectedDate.year}
           selectedDate={props.selectedDate.startOf("day")}
           selectDate={props.setDate}
         />
@@ -56,10 +60,14 @@ function CalendarLayout(props: CalendarLayoutProps) {
         />
       </div>
       <div className="right-calendar">
-        <CalendarControlRight />
+        <CalendarControlRight
+          decreaseMonth={() => {}}
+          monthName="test"
+          year={2002}
+        />
         <Calendar
-          month={currDateDetails.month + 1}
-          year={currDateDetails.year}
+          month={props.selectedDate.month + 1}
+          year={props.selectedDate.year}
           selectedDate={props.selectedDate.startOf("day")}
           selectDate={props.setDate}
         />
