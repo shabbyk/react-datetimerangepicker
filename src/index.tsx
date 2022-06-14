@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
-import App from './App';
+import ReactDateTimeRangePicker from './ReactDateTimeRangePicker';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ReactDateTimeRangePicker dateFormat='dd/MM/yyyy hh:mm:ss' width={200}/>
   </React.StrictMode>
 );
 

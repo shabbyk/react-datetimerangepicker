@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { DateTime } from "luxon";
 
@@ -48,7 +48,6 @@ function Month(props: MonthProps) {
       date: DateTime.fromISO(e.target.dataset.date),
     });
 
-    // console.log(e);
     e.stopPropagation();
   }
 

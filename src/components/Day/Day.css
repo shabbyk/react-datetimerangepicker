@@ -10,6 +10,7 @@
 .date-cell {
     flex: 1;
     cursor: pointer;
+    text-align: center;
 }
 
 .default-hover:hover {
