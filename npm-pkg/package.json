@@ -1,0 +1,38 @@
+{
+  "name": "@shabbyk/react-datetimerangepicker",
+  "version": "1.0.0-beta",
+  "description": "React date time range picker",
+  "main": "ReactDateTimeRangePicker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shabbyk/react-datetimerangepicker.git"
+  },
+  "keywords": [
+    "react",
+    "react-datetimepicker",
+    "react",
+    "date",
+    "time",
+    "picker",
+    "react",
+    "date",
+    "picker",
+    "react",
+    "date",
+    "time",
+    "picker",
+    "luxon",
+    "datime",
+    "date",
+    "picker"
+  ],
+  "author": "shabbyk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shabbyk/react-datetimerangepicker/issues"
+  },
+  "homepage": "https://github.com/shabbyk/react-datetimerangepicker#readme"
+}

@@ -22,6 +22,7 @@ function ReactDateTimeRangePicker(props: ReactDateTimeRangePickerProps) {
         className=""
         title="left-calendar-input"
         placeholder="selected date..."
+        defaultValue={selectedDate.toFormat(props.dateFormat)}
         value={selectedDate.toFormat(props.dateFormat)}
         onFocus={(e) => setShowPopup(true)}
         style={{ width: props.width }}
