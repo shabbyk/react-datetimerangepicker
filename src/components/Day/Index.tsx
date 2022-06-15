@@ -10,13 +10,16 @@ type DayProps = {
   currMonth: number;
   selectedDate: DateTime;
   hoverProps: HoverProps;
+  startDate: DateTime;
+  endDate: DateTime;
   selectDate: (date: DateTime) => any;
 };
 
 function getClassName(
   currElDate: DateTime,
   currMonth: number,
-  selectedDate: DateTime
+  startDate: DateTime,
+  endDate: DateTime,
 ): string {
   var classNameString = "date-cell";
 
@@ -24,8 +27,8 @@ function getClassName(
     classNameString += " filler-date";
   }
 
-  if (currElDate.toMillis() === selectedDate.toMillis()) {
-    classNameString += " start-date";
+  if (currElDate.toMillis() === startDate.toMillis() || currElDate.toMillis() === endDate.toMillis()) {
+    classNameString += " selected-date";
   } else {
     classNameString += " default-hover";
   }
@@ -45,12 +48,12 @@ function handleClick(e: any, props: DayProps) {
 }
 
 function Day(props: DayProps) {
-  let classes = getClassName(props.date, props.currMonth, props.selectedDate);
+  let classes = getClassName(props.date, props.currMonth, props.startDate, props.endDate);
 
   if (props.hoverProps.hovering && props.hoverProps.date) {
     if (
-      props.date.toMillis() > props.selectedDate.toMillis() &&
-      props.date.toMillis() < props.hoverProps.date.toMillis()
+      props.date.toMillis() > props.startDate.toMillis() && 
+      !props.endDate
     ) {
       classes += " in-range";
     }

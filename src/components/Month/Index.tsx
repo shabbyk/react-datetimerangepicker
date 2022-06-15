@@ -10,6 +10,8 @@ type MonthProps = {
   month: number;
   year: number;
   selectedDate: DateTime;
+  startDate: DateTime;
+  endDate: DateTime;
   selectDate: (date: DateTime) => any;
 };
 
@@ -34,6 +36,8 @@ function Month(props: MonthProps) {
         month={props.month}
         year={props.year}
         selectedDate={props.selectedDate}
+        startDate={props.startDate.startOf("day")}
+        endDate={props.endDate.startOf("day")}
         hoverProps={hoverProps}
         selectDate={props.selectDate}
       />

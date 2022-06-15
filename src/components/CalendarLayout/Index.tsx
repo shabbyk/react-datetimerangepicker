@@ -42,6 +42,8 @@ function CalendarLayout(props: CalendarLayoutProps) {
     rightMonthName: props.selectedDate.plus({ month: 1 }).monthShort,
     rightMonthYear: props.selectedDate.plus({ month: 1 }).year,
   } as CalendarLayoutState);
+  const [startDate, setStartDate] = useState(props.selectedDate.minus({days: 1}));
+  const [endDate, setEndDate] = useState(props.selectedDate.plus({days: 1}));
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -101,15 +103,17 @@ function CalendarLayout(props: CalendarLayoutProps) {
         <Calendar
           month={calendarInit.leftMonth}
           year={calendarInit.leftMonthYear}
-          selectedDate={props.selectedDate.startOf("day")}
-          selectDate={props.setDate}
+          selectedDate={startDate.startOf("day")}
+          startDate={startDate.startOf("day")}
+          endDate={endDate.startOf("day")}
+          selectDate={setStartDate}
         />
         <TimePicker
-          selectedDate={props.selectedDate}
-          selectedHour={props.selectedDate.hour}
-          selectedMinute={props.selectedDate.minute}
-          selectedSecond={props.selectedDate.second}
-          setDate={props.setDate}
+          selectedDate={startDate}
+          selectedHour={startDate.hour}
+          selectedMinute={startDate.minute}
+          selectedSecond={startDate.second}
+          setDate={setStartDate}
         />
       </div>
       <div
@@ -126,15 +130,17 @@ function CalendarLayout(props: CalendarLayoutProps) {
         <Calendar
           month={calendarInit.rightMonth}
           year={calendarInit.rightMonthYear}
-          selectedDate={props.selectedDate.startOf("day")}
-          selectDate={props.setDate}
+          selectedDate={endDate.startOf("day")}
+          startDate={startDate.startOf("day")}
+          endDate={endDate.startOf("day")}
+          selectDate={setEndDate}
         />
         <TimePicker
-          selectedDate={props.selectedDate}
-          selectedHour={props.selectedDate.hour}
-          selectedMinute={props.selectedDate.minute}
-          selectedSecond={props.selectedDate.second}
-          setDate={props.setDate}
+          selectedDate={endDate}
+          selectedHour={endDate.hour}
+          selectedMinute={endDate.minute}
+          selectedSecond={endDate.second}
+          setDate={setEndDate}
         />
       </div>
     </div>

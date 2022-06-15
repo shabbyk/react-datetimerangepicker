@@ -13,6 +13,8 @@ type WeekProps = {
   month: number;
   selectedDate: DateTime;
   hoverProps: HoverProps;
+  startDate: DateTime;
+  endDate: DateTime;
   selectDate: (date: DateTime) => any;
 };
 
@@ -44,6 +46,8 @@ function Week(props: WeekProps) {
           date={el}
           selectDate={props.selectDate}
           selectedDate={props.selectedDate}
+          startDate={props.startDate.startOf("day")}
+          endDate={props.endDate.startOf("day")}
           currMonth={currMonth}
           hoverProps={props.hoverProps}
         />
