@@ -2,6 +2,7 @@ import React from 'react';
 
 import ReactDateTimeRangePicker from '@shabbyk/react-datetimerangepicker';
 
+import '@shabbyk/react-datetimerangepicker/ReactDateTimeRangePicker.css';
 import './App.css';
 
 function App() {
