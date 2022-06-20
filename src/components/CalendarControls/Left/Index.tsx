@@ -7,7 +7,8 @@ function CalendarControlLeft(props: CalendarControlProps) {
     <div className="left-control-container">
       <div className="left" onClick={() => props.decreaseMonth!()}></div>
       <div className="centre">
-        {props.monthName}/{props.year}
+        <span className="month-name">{props.monthName}</span>
+        <span className="year-name">{props.year}</span>
       </div>
     </div>
   );

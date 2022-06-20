@@ -7,6 +7,7 @@ import TimePicker from "../TimePicker/Index";
 import CalendarControlLeft from "../CalendarControls/Left/Index";
 import CalendarControlRight from "../CalendarControls/Right/Index";
 import "./CalendarLayout.css";
+import { HoverProps } from "../../types/HoverProps";
 
 type CalendarLayoutProps = {
   width: number;
@@ -42,6 +43,15 @@ function CalendarLayout(props: CalendarLayoutProps) {
     rightMonthName: props.selectedDate.plus({ month: 1 }).monthShort,
     rightMonthYear: props.selectedDate.plus({ month: 1 }).year,
   } as CalendarLayoutState);
+  const [startDate, setStartDate] = useState<DateTime>(
+    props.selectedDate.minus({ days: 1 })
+  );
+  const [endDate, setEndDate] = useState<DateTime | undefined>(
+    props.selectedDate.plus({ days: 1 })
+  );
+  const [hoverProps, setHoverProps] = useState({
+    hovering: false,
+  } as HoverProps);
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -52,6 +62,11 @@ function CalendarLayout(props: CalendarLayoutProps) {
         handleOutsideClick(appRef, e, props.closeFn)
       );
   });
+
+  function setDateRange(startDate: DateTime, endDate?: DateTime) {
+    setStartDate(startDate);
+    setEndDate(endDate);
+  }
 
   function increaseMonth() {
     var date = DateTime.fromObject({
@@ -85,8 +100,34 @@ function CalendarLayout(props: CalendarLayoutProps) {
     });
   }
 
+  function handleHoverOn(e: any) {
+    if (e.target.dataset.isfiller === "true") return;
+
+    setHoverProps({
+      hovering: true,
+      date: DateTime.fromISO(e.target.dataset.date),
+    });
+
+    e.stopPropagation();
+  }
+
+  function handleHoverOff(e: any) {
+    if (e.target.dataset.isfiller === "true") return;
+
+    setHoverProps({
+      hovering: false,
+    });
+
+    e.stopPropagation();
+  }
+
   return (
-    <div className="calendar-layout" ref={appRef}>
+    <div
+      className="calendar-layout"
+      ref={appRef}
+      onMouseOver={handleHoverOn}
+      onMouseOut={handleHoverOff}
+    >
       <div
         className="left-calendar"
         style={{
@@ -101,15 +142,19 @@ function CalendarLayout(props: CalendarLayoutProps) {
         <Calendar
           month={calendarInit.leftMonth}
           year={calendarInit.leftMonthYear}
-          selectedDate={props.selectedDate.startOf("day")}
-          selectDate={props.setDate}
+          selectedDate={startDate!.startOf("day")}
+          startDate={startDate!.startOf("day")}
+          endDate={endDate ? endDate.startOf("day") : undefined}
+          hoverProps={hoverProps}
+          setHoverProps={setHoverProps}
+          selectDateRange={setDateRange}
         />
         <TimePicker
-          selectedDate={props.selectedDate}
-          selectedHour={props.selectedDate.hour}
-          selectedMinute={props.selectedDate.minute}
-          selectedSecond={props.selectedDate.second}
-          setDate={props.setDate}
+          selectedDate={startDate!}
+          selectedHour={startDate!.hour}
+          selectedMinute={startDate!.minute}
+          selectedSecond={startDate!.second}
+          setDate={setStartDate}
         />
       </div>
       <div
@@ -126,15 +171,19 @@ function CalendarLayout(props: CalendarLayoutProps) {
         <Calendar
           month={calendarInit.rightMonth}
           year={calendarInit.rightMonthYear}
-          selectedDate={props.selectedDate.startOf("day")}
-          selectDate={props.setDate}
+          selectedDate={endDate ? endDate.startOf("day") : undefined}
+          startDate={startDate!.startOf("day")}
+          endDate={endDate ? endDate.startOf("day") : undefined}
+          hoverProps={hoverProps}
+          setHoverProps={setHoverProps}
+          selectDateRange={setDateRange}
         />
         <TimePicker
-          selectedDate={props.selectedDate}
-          selectedHour={props.selectedDate.hour}
-          selectedMinute={props.selectedDate.minute}
-          selectedSecond={props.selectedDate.second}
-          setDate={props.setDate}
+          selectedDate={endDate}
+          selectedHour={endDate ? endDate.hour : 12}
+          selectedMinute={endDate ? endDate.minute : 0}
+          selectedSecond={endDate ? endDate.second : 0}
+          setDate={setEndDate}
         />
       </div>
     </div>
