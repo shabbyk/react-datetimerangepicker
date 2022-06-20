@@ -1,0 +1,13 @@
+.calendar-layout {
+    display: flex;
+}
+
+.calendar-layout .left-control-container, .calendar-layout .right-control-container {
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: bold;
+}
+
+.calendar-layout .left-calendar {
+    margin-right: 20px;
+}

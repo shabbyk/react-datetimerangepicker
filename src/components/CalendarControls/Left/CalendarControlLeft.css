@@ -1,0 +1,11 @@
+.left {
+    cursor: pointer;
+}
+
+.left::before {
+    content: '<';
+}
+
+.month-name {
+    margin-right: 5px;
+}

@@ -19,7 +19,6 @@ function MinutesPicker(props: MinutesPickerProps) {
   }
   return (
     <div className="minutes-picker-container">
-      <label>mm:</label>
       <select
         defaultValue={props.selected}
         onChange={(e) => props.setMinute(+e.target.value)}

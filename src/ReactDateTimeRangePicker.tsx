@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { DateTime } from "luxon";
 
 import "./ReactDateTimeRangePicker.css";
-import LeftCalendar from "./components/LeftCalendar/Index";
-import RightCalendar from "./components/RightCalendar/Index";
+import CalendarLayout from "./components/CalendarLayout/Index";
 
 type ReactDateTimeRangePickerProps = {
   dateFormat: string;
   width: number;
+  dateRangePicker: boolean;
 };
 
 function ReactDateTimeRangePicker(props: ReactDateTimeRangePickerProps) {
-
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedDate, setDate] = useState(DateTime.now());
   return (
     <div className="rdtrp-container">
-      <LeftCalendar dateFormat={props.dateFormat} width={props.width}/>
-      <RightCalendar dateFormat={props.dateFormat} width={props.width}/>
+      <input
+        type="text"
+        name="dates"
+        className=""
+        title="left-calendar-input"
+        placeholder="selected date..."
+        value={selectedDate.toFormat(props.dateFormat)}
+        onFocus={(e) => setShowPopup(true)}
+        style={{ width: props.width }}
+      />
+      {
+        showPopup &&
+        <div className="calendar-popup">
+          <CalendarLayout
+            closeFn={setShowPopup}
+            width={props.width}
+            selectedDate={selectedDate}
+            setDate={setDate}
+          />
+        </div>
+      }
     </div>
   );
 }
