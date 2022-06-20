@@ -21,7 +21,6 @@ function HourPicker(props: HourPickerProps) {
 
   return (
     <div className="hour-picker-container">
-      <label>HH:</label>
       <select
         className="hour-picker"
         defaultValue={props.selected}

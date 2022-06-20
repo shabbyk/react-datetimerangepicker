@@ -7,6 +7,7 @@ import TimePicker from "../TimePicker/Index";
 import CalendarControlLeft from "../CalendarControls/Left/Index";
 import CalendarControlRight from "../CalendarControls/Right/Index";
 import "./CalendarLayout.css";
+import { HoverProps } from "../../types/HoverProps";
 
 type CalendarLayoutProps = {
   width: number;
@@ -48,6 +49,9 @@ function CalendarLayout(props: CalendarLayoutProps) {
   const [endDate, setEndDate] = useState<DateTime | undefined>(
     props.selectedDate.plus({ days: 1 })
   );
+  const [hoverProps, setHoverProps] = useState({
+    hovering: false,
+  } as HoverProps);
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -96,8 +100,34 @@ function CalendarLayout(props: CalendarLayoutProps) {
     });
   }
 
+  function handleHoverOn(e: any) {
+    if (e.target.dataset.isfiller === "true") return;
+
+    setHoverProps({
+      hovering: true,
+      date: DateTime.fromISO(e.target.dataset.date),
+    });
+
+    e.stopPropagation();
+  }
+
+  function handleHoverOff(e: any) {
+    if (e.target.dataset.isfiller === "true") return;
+
+    setHoverProps({
+      hovering: false,
+    });
+
+    e.stopPropagation();
+  }
+
   return (
-    <div className="calendar-layout" ref={appRef}>
+    <div
+      className="calendar-layout"
+      ref={appRef}
+      onMouseOver={handleHoverOn}
+      onMouseOut={handleHoverOff}
+    >
       <div
         className="left-calendar"
         style={{
@@ -115,6 +145,8 @@ function CalendarLayout(props: CalendarLayoutProps) {
           selectedDate={startDate!.startOf("day")}
           startDate={startDate!.startOf("day")}
           endDate={endDate ? endDate.startOf("day") : undefined}
+          hoverProps={hoverProps}
+          setHoverProps={setHoverProps}
           selectDateRange={setDateRange}
         />
         <TimePicker
@@ -142,6 +174,8 @@ function CalendarLayout(props: CalendarLayoutProps) {
           selectedDate={endDate ? endDate.startOf("day") : undefined}
           startDate={startDate!.startOf("day")}
           endDate={endDate ? endDate.startOf("day") : undefined}
+          hoverProps={hoverProps}
+          setHoverProps={setHoverProps}
           selectDateRange={setDateRange}
         />
         <TimePicker

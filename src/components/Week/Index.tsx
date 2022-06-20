@@ -43,6 +43,7 @@ function Week(props: WeekProps) {
     <div className="week">
       {weekTemplate.map((el) => (
         <Day
+          key={el.toMillis()}
           date={el}
           selectDateRange={props.selectDateRange}
           selectedDate={props.selectedDate}

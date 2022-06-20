@@ -31,12 +31,13 @@ function TimePicker(props: TimePickerProps) {
   }
   return (
     <div className="timepicker">
-      <HourPicker is24Format selected={props.selectedHour} setHour={setHour} />
+      <HourPicker is24Format selected={props.selectedHour} setHour={setHour} />:
       <MinutesPicker
         increment={1}
         selected={props.selectedMinute}
         setMinute={setMinute}
       />
+      :
       <SecondsPicker selected={props.selectedSecond} setSecond={setSecond} />
     </div>
   );

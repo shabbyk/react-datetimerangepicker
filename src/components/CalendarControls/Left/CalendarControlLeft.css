@@ -5,3 +5,7 @@
 .left::before {
     content: '<';
 }
+
+.month-name {
+    margin-right: 5px;
+}
