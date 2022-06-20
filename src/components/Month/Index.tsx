@@ -9,10 +9,10 @@ import { HoverProps } from "../../types/HoverProps";
 type MonthProps = {
   month: number;
   year: number;
-  selectedDate: DateTime;
+  selectedDate?: DateTime;
   startDate: DateTime;
-  endDate: DateTime;
-  selectDateRange: (startDate?: DateTime, endDate?: DateTime) => any;
+  endDate?: DateTime;
+  selectDateRange: (startDate: DateTime, endDate?: DateTime) => any;
 };
 
 function Month(props: MonthProps) {
@@ -37,7 +37,7 @@ function Month(props: MonthProps) {
         year={props.year}
         selectedDate={props.selectedDate}
         startDate={props.startDate.startOf("day")}
-        endDate={props.endDate.startOf("day")}
+        endDate={props.endDate ? props.endDate.startOf("day") : undefined}
         hoverProps={hoverProps}
         selectDateRange={props.selectDateRange}
       />

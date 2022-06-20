@@ -42,8 +42,12 @@ function CalendarLayout(props: CalendarLayoutProps) {
     rightMonthName: props.selectedDate.plus({ month: 1 }).monthShort,
     rightMonthYear: props.selectedDate.plus({ month: 1 }).year,
   } as CalendarLayoutState);
-  const [startDate, setStartDate] = useState<DateTime | undefined>(props.selectedDate.minus({days: 1}));
-  const [endDate, setEndDate] = useState<DateTime | undefined>(props.selectedDate.plus({days: 1}));
+  const [startDate, setStartDate] = useState<DateTime>(
+    props.selectedDate.minus({ days: 1 })
+  );
+  const [endDate, setEndDate] = useState<DateTime | undefined>(
+    props.selectedDate.plus({ days: 1 })
+  );
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -55,7 +59,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
       );
   });
 
-  function setDateRange(startDate?: DateTime, endDate?: DateTime) {
+  function setDateRange(startDate: DateTime, endDate?: DateTime) {
     setStartDate(startDate);
     setEndDate(endDate);
   }
@@ -110,7 +114,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
           year={calendarInit.leftMonthYear}
           selectedDate={startDate!.startOf("day")}
           startDate={startDate!.startOf("day")}
-          endDate={endDate!.startOf("day")}
+          endDate={endDate ? endDate.startOf("day") : undefined}
           selectDateRange={setDateRange}
         />
         <TimePicker
@@ -135,16 +139,16 @@ function CalendarLayout(props: CalendarLayoutProps) {
         <Calendar
           month={calendarInit.rightMonth}
           year={calendarInit.rightMonthYear}
-          selectedDate={endDate!.startOf("day")}
+          selectedDate={endDate ? endDate.startOf("day") : undefined}
           startDate={startDate!.startOf("day")}
-          endDate={endDate!.startOf("day")}
+          endDate={endDate ? endDate.startOf("day") : undefined}
           selectDateRange={setDateRange}
         />
         <TimePicker
-          selectedDate={endDate!}
-          selectedHour={endDate!.hour}
-          selectedMinute={endDate!.minute}
-          selectedSecond={endDate!.second}
+          selectedDate={endDate}
+          selectedHour={endDate ? endDate.hour : 12}
+          selectedMinute={endDate ? endDate.minute : 0}
+          selectedSecond={endDate ? endDate.second : 0}
           setDate={setEndDate}
         />
       </div>
