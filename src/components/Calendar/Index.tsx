@@ -11,7 +11,7 @@ type CalendarProps = {
   selectedDate: DateTime;
   startDate: DateTime;
   endDate: DateTime;
-  selectDate: (val: DateTime) => any;
+  selectDateRange: (startDate?: DateTime, endDate?: DateTime) => any;
 };
 
 function Calendar(props: CalendarProps) {
@@ -22,7 +22,7 @@ function Calendar(props: CalendarProps) {
       selectedDate={props.selectedDate}
       startDate={props.startDate.startOf("day")}
       endDate={props.endDate.startOf("day")}
-      selectDate={props.selectDate}
+      selectDateRange={props.selectDateRange}
     />
   );
 }

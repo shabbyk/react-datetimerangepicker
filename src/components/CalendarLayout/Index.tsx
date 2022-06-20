@@ -42,8 +42,8 @@ function CalendarLayout(props: CalendarLayoutProps) {
     rightMonthName: props.selectedDate.plus({ month: 1 }).monthShort,
     rightMonthYear: props.selectedDate.plus({ month: 1 }).year,
   } as CalendarLayoutState);
-  const [startDate, setStartDate] = useState(props.selectedDate.minus({days: 1}));
-  const [endDate, setEndDate] = useState(props.selectedDate.plus({days: 1}));
+  const [startDate, setStartDate] = useState<DateTime | undefined>(props.selectedDate.minus({days: 1}));
+  const [endDate, setEndDate] = useState<DateTime | undefined>(props.selectedDate.plus({days: 1}));
 
   useEffect(() => {
     document.addEventListener("mousedown", (e) =>
@@ -54,6 +54,11 @@ function CalendarLayout(props: CalendarLayoutProps) {
         handleOutsideClick(appRef, e, props.closeFn)
       );
   });
+
+  function setDateRange(startDate?: DateTime, endDate?: DateTime) {
+    setStartDate(startDate);
+    setEndDate(endDate);
+  }
 
   function increaseMonth() {
     var date = DateTime.fromObject({
@@ -103,16 +108,16 @@ function CalendarLayout(props: CalendarLayoutProps) {
         <Calendar
           month={calendarInit.leftMonth}
           year={calendarInit.leftMonthYear}
-          selectedDate={startDate.startOf("day")}
-          startDate={startDate.startOf("day")}
-          endDate={endDate.startOf("day")}
-          selectDate={setStartDate}
+          selectedDate={startDate!.startOf("day")}
+          startDate={startDate!.startOf("day")}
+          endDate={endDate!.startOf("day")}
+          selectDateRange={setDateRange}
         />
         <TimePicker
-          selectedDate={startDate}
-          selectedHour={startDate.hour}
-          selectedMinute={startDate.minute}
-          selectedSecond={startDate.second}
+          selectedDate={startDate!}
+          selectedHour={startDate!.hour}
+          selectedMinute={startDate!.minute}
+          selectedSecond={startDate!.second}
           setDate={setStartDate}
         />
       </div>
@@ -130,16 +135,16 @@ function CalendarLayout(props: CalendarLayoutProps) {
         <Calendar
           month={calendarInit.rightMonth}
           year={calendarInit.rightMonthYear}
-          selectedDate={endDate.startOf("day")}
-          startDate={startDate.startOf("day")}
-          endDate={endDate.startOf("day")}
-          selectDate={setEndDate}
+          selectedDate={endDate!.startOf("day")}
+          startDate={startDate!.startOf("day")}
+          endDate={endDate!.startOf("day")}
+          selectDateRange={setDateRange}
         />
         <TimePicker
-          selectedDate={endDate}
-          selectedHour={endDate.hour}
-          selectedMinute={endDate.minute}
-          selectedSecond={endDate.second}
+          selectedDate={endDate!}
+          selectedHour={endDate!.hour}
+          selectedMinute={endDate!.minute}
+          selectedSecond={endDate!.second}
           setDate={setEndDate}
         />
       </div>

@@ -15,7 +15,7 @@ type WeekProps = {
   hoverProps: HoverProps;
   startDate: DateTime;
   endDate: DateTime;
-  selectDate: (date: DateTime) => any;
+  selectDateRange: (startDate?: DateTime, endDate?: DateTime) => any;
 };
 
 function Week(props: WeekProps) {
@@ -44,7 +44,7 @@ function Week(props: WeekProps) {
       {weekTemplate.map((el) => (
         <Day
           date={el}
-          selectDate={props.selectDate}
+          selectDateRange={props.selectDateRange}
           selectedDate={props.selectedDate}
           startDate={props.startDate.startOf("day")}
           endDate={props.endDate.startOf("day")}

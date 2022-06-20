@@ -12,7 +12,7 @@ type DayProps = {
   hoverProps: HoverProps;
   startDate: DateTime;
   endDate: DateTime;
-  selectDate: (date: DateTime) => any;
+  selectDateRange: (startDate?: DateTime, endDate?: DateTime) => any;
 };
 
 function getClassName(
@@ -41,22 +41,23 @@ function dayContent(date: DateTime) {
 }
 
 function handleClick(e: any, props: DayProps) {
-  if (props.date.month === props.currMonth) {
-    props.selectDate(props.date.startOf("day"));
+  if((props.startDate && props.endDate) || (!props.startDate && !props.endDate)) {
+    props.selectDateRange(props.date.startOf("day"), undefined);
+  } else if (props.startDate && !props.endDate) {
+    props.selectDateRange(props.startDate, props.date.startOf("day"));
   }
+
   e.stopPropagation();
 }
 
 function Day(props: DayProps) {
   let classes = getClassName(props.date, props.currMonth, props.startDate, props.endDate);
 
-  if (props.hoverProps.hovering && props.hoverProps.date) {
-    if (
-      props.date.toMillis() > props.startDate.toMillis() && 
-      !props.endDate
-    ) {
-      classes += " in-range";
-    }
+  if (
+    props.date.toMillis() > props.startDate.toMillis() &&
+    props.date.toMillis() < props.endDate.toMillis()
+  ) {
+    classes += " in-range";
   }
 
   return (
@@ -64,7 +65,7 @@ function Day(props: DayProps) {
       className={classes}
       data-date={props.date.toISO()}
       data-isfiller={props.date.month !== props.currMonth}
-      onClick={(e) => handleClick(e, props)}
+      onClick={(e) => props.date.month === props.currMonth ? handleClick(e, props) : e.preventDefault() }
     >
       {dayContent(props.date)}
     </div>
