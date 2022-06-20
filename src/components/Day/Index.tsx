@@ -50,7 +50,14 @@ function handleClick(e: any, props: DayProps) {
   ) {
     props.selectDateRange(props.date.startOf("day"), undefined);
   } else if (props.startDate && !props.endDate) {
-    props.selectDateRange(props.startDate, props.date.startOf("day"));
+    if (
+      props.date.startOf("day").toMillis() <
+      props.startDate.startOf("day").toMillis()
+    ) {
+      props.selectDateRange(props.date.startOf("day"), undefined);
+    } else {
+      props.selectDateRange(props.startDate, props.date.startOf("day"));
+    }
   }
 
   e.stopPropagation();
