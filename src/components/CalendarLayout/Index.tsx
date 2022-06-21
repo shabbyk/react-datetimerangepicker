@@ -8,12 +8,14 @@ import CalendarControlLeft from "../CalendarControls/Left/Index";
 import CalendarControlRight from "../CalendarControls/Right/Index";
 import "./CalendarLayout.css";
 import { HoverProps } from "../../types/HoverProps";
+import SelectionPanel from "../SelectionPanel/Index";
 
 type CalendarLayoutProps = {
   width: number;
   selectedDate: DateTime;
+  dateFormat: string;
+  setSelectedRangeDisplay: (range: string) => any;
   closeFn: (show: boolean) => any;
-  setDate: (date: DateTime) => any;
 };
 
 type CalendarLayoutState = {
@@ -66,6 +68,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
   function setDateRange(startDate: DateTime, endDate?: DateTime) {
     setStartDate(startDate);
     setEndDate(endDate);
+    props.setSelectedRangeDisplay(`${startDate.toFormat(props.dateFormat)} - ${endDate?.toFormat(props.dateFormat)}`);
   }
 
   function increaseMonth() {
@@ -128,63 +131,73 @@ function CalendarLayout(props: CalendarLayoutProps) {
       onMouseOver={handleHoverOn}
       onMouseOut={handleHoverOff}
     >
-      <div
-        className="left-calendar"
-        style={{
-          width: props.width,
-        }}
-      >
-        <CalendarControlLeft
-          decreaseMonth={decreaseMonth}
-          monthName={calendarInit.leftMonthName}
-          year={calendarInit.leftMonthYear}
-        />
-        <Calendar
-          month={calendarInit.leftMonth}
-          year={calendarInit.leftMonthYear}
-          selectedDate={startDate!.startOf("day")}
-          startDate={startDate!.startOf("day")}
-          endDate={endDate ? endDate.startOf("day") : undefined}
-          hoverProps={hoverProps}
-          setHoverProps={setHoverProps}
-          selectDateRange={setDateRange}
-        />
-        <TimePicker
-          selectedDate={startDate!}
-          selectedHour={startDate!.hour}
-          selectedMinute={startDate!.minute}
-          selectedSecond={startDate!.second}
-          setDate={setStartDate}
-        />
+      <div className="calendars">
+        <div
+          className="left-calendar"
+          style={{
+            width: props.width,
+          }}
+        >
+          <CalendarControlLeft
+            decreaseMonth={decreaseMonth}
+            monthName={calendarInit.leftMonthName}
+            year={calendarInit.leftMonthYear}
+          />
+          <Calendar
+            month={calendarInit.leftMonth}
+            year={calendarInit.leftMonthYear}
+            selectedDate={startDate!.startOf("day")}
+            startDate={startDate!.startOf("day")}
+            endDate={endDate ? endDate.startOf("day") : undefined}
+            hoverProps={hoverProps}
+            setHoverProps={setHoverProps}
+            selectDateRange={setDateRange}
+          />
+          <TimePicker
+            selectedDate={startDate!}
+            selectedHour={startDate!.hour}
+            selectedMinute={startDate!.minute}
+            selectedSecond={startDate!.second}
+            setDate={setStartDate}
+          />
+        </div>
+        <div
+          className="right-calendar"
+          style={{
+            width: props.width,
+          }}
+        >
+          <CalendarControlRight
+            increaseMonth={increaseMonth}
+            monthName={calendarInit.rightMonthName}
+            year={calendarInit.rightMonthYear}
+          />
+          <Calendar
+            month={calendarInit.rightMonth}
+            year={calendarInit.rightMonthYear}
+            selectedDate={endDate ? endDate.startOf("day") : undefined}
+            startDate={startDate!.startOf("day")}
+            endDate={endDate ? endDate.startOf("day") : undefined}
+            hoverProps={hoverProps}
+            setHoverProps={setHoverProps}
+            selectDateRange={setDateRange}
+          />
+          <TimePicker
+            selectedDate={endDate}
+            selectedHour={endDate ? endDate.hour : 12}
+            selectedMinute={endDate ? endDate.minute : 0}
+            selectedSecond={endDate ? endDate.second : 0}
+            setDate={setEndDate}
+          />
+        </div>
       </div>
-      <div
-        className="right-calendar"
-        style={{
-          width: props.width,
-        }}
-      >
-        <CalendarControlRight
-          increaseMonth={increaseMonth}
-          monthName={calendarInit.rightMonthName}
-          year={calendarInit.rightMonthYear}
-        />
-        <Calendar
-          month={calendarInit.rightMonth}
-          year={calendarInit.rightMonthYear}
-          selectedDate={endDate ? endDate.startOf("day") : undefined}
-          startDate={startDate!.startOf("day")}
-          endDate={endDate ? endDate.startOf("day") : undefined}
-          hoverProps={hoverProps}
-          setHoverProps={setHoverProps}
+      <div className="selection-panel-container">
+        <SelectionPanel 
+          startDate={startDate} 
+          endDate={endDate} 
+          format={props.dateFormat} 
           selectDateRange={setDateRange}
-        />
-        <TimePicker
-          selectedDate={endDate}
-          selectedHour={endDate ? endDate.hour : 12}
-          selectedMinute={endDate ? endDate.minute : 0}
-          selectedSecond={endDate ? endDate.second : 0}
-          setDate={setEndDate}
-        />
+          />
       </div>
     </div>
   );

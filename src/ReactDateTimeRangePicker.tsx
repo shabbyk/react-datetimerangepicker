@@ -9,31 +9,31 @@ type ReactDateTimeRangePickerProps = {
   dateFormat: string;
   width: number;
   dateRangePicker: boolean;
+  selectedDate: DateTime;
 };
 
 function ReactDateTimeRangePicker(props: ReactDateTimeRangePickerProps) {
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedDate, setDate] = useState(DateTime.now());
+  const [selectedRange, setSelectedRangeDisplay] = useState<string | undefined>();
   return (
     <div className="rdtrp-container">
       <input
         type="text"
         name="dates"
-        className=""
-        title="left-calendar-input"
+        className="selection-display"
         placeholder="selected date..."
-        value={selectedDate.toFormat(props.dateFormat)}
+        value={selectedRange}
         onFocus={(e) => setShowPopup(true)}
-        style={{ width: props.width }}
       />
       {
         showPopup &&
         <div className="calendar-popup">
           <CalendarLayout
+            dateFormat={props.dateFormat}
             closeFn={setShowPopup}
             width={props.width}
-            selectedDate={selectedDate}
-            setDate={setDate}
+            selectedDate={props.selectedDate}
+            setSelectedRangeDisplay={setSelectedRangeDisplay}
           />
         </div>
       }
