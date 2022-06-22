@@ -1,0 +1,33 @@
+.selection-panel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.selection-panel .display-section {
+  display: flex;
+  align-items: center;
+}
+
+.selection-panel .cancel-button {
+  border-radius: 4px;
+  background: none;
+  border: 1px solid #ffc107;
+}
+
+.selection-panel .cancel-button:hover {
+  cursor: pointer;
+  background: #ffc107;
+  color: white;
+}
+
+.selection-panel .range-selection-button {
+  border-radius: 4px;
+  background: none;
+  border: 1px solid teal;
+}
+
+.selection-panel .range-selection-button:hover {
+  background: teal;
+  cursor: pointer;
+  color: white;
+}

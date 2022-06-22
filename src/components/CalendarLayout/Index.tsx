@@ -204,6 +204,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
           endDate={endDate} 
           format={props.dateFormat} 
           applyDateRange={applySelectedDateRange}
+          closeFn={props.closeFn}
           />
       </div>
     </div>
