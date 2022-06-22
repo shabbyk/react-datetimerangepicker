@@ -4,6 +4,8 @@ import { DateTime } from "luxon";
 
 import "./ReactDateTimeRangePicker.css";
 import CalendarLayout from "./components/CalendarLayout/Index";
+import DisplayPanel from "./components/DisplayPanel/Index";
+import { SelectedRange } from "./types/SelectedRange";
 
 type ReactDateTimeRangePickerProps = {
   dateFormat: string;
@@ -14,29 +16,27 @@ type ReactDateTimeRangePickerProps = {
 
 function ReactDateTimeRangePicker(props: ReactDateTimeRangePickerProps) {
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedRange, setSelectedRangeDisplay] = useState<string | undefined>();
+  const [selectedRange, setSelectedRange] = useState<SelectedRange>();
+
   return (
     <div className="rdtrp-container">
-      <input
-        type="text"
-        name="dates"
-        className="selection-display"
-        placeholder="selected date..."
-        value={selectedRange}
-        onFocus={(e) => setShowPopup(true)}
+      <DisplayPanel
+        selectedRange={selectedRange}
+        setShowPopup={setShowPopup}
+        selectedDate={props.selectedDate}
+        dateFormat={props.dateFormat}
       />
-      {
-        showPopup &&
+      {showPopup && (
         <div className="calendar-popup">
           <CalendarLayout
             dateFormat={props.dateFormat}
             closeFn={setShowPopup}
             width={props.width}
             selectedDate={props.selectedDate}
-            setSelectedRangeDisplay={setSelectedRangeDisplay}
+            setSelectedRange={setSelectedRange}
           />
         </div>
-      }
+      )}
     </div>
   );
 }

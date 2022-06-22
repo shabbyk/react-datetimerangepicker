@@ -71,10 +71,6 @@ function Day(props: DayProps) {
     props.endDate
   );
 
-  if (+props.date.toFormat("dd") === 22) {
-    debugger;
-  }
-
   /*
     If endDate is selected, only highligh selected range.
     Do not highlight on hover.

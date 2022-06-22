@@ -29,6 +29,7 @@ function TimePicker(props: TimePickerProps) {
     props.selectedDate &&
       props.setDate(props.selectedDate.set({ second: sec }));
   }
+  
   return (
     <div className="timepicker">
       <HourPicker is24Format selected={props.selectedHour} setHour={setHour} />:

@@ -9,12 +9,13 @@ import CalendarControlRight from "../CalendarControls/Right/Index";
 import "./CalendarLayout.css";
 import { HoverProps } from "../../types/HoverProps";
 import SelectionPanel from "../SelectionPanel/Index";
+import { SelectedRange } from "../../types/SelectedRange";
 
 type CalendarLayoutProps = {
   width: number;
   selectedDate: DateTime;
   dateFormat: string;
-  setSelectedRangeDisplay: (range: string) => any;
+  setSelectedRange: (range: SelectedRange) => any;
   closeFn: (show: boolean) => any;
 };
 
@@ -68,7 +69,13 @@ function CalendarLayout(props: CalendarLayoutProps) {
   function setDateRange(startDate: DateTime, endDate?: DateTime) {
     setStartDate(startDate);
     setEndDate(endDate);
-    props.setSelectedRangeDisplay(`${startDate.toFormat(props.dateFormat)} - ${endDate?.toFormat(props.dateFormat)}`);
+  }
+
+  function applySelectedDateRange(startDate: DateTime, endDate: DateTime) {
+    props.setSelectedRange({
+      startDate: startDate,
+      endDate: endDate
+    });
   }
 
   function increaseMonth() {
@@ -196,7 +203,7 @@ function CalendarLayout(props: CalendarLayoutProps) {
           startDate={startDate} 
           endDate={endDate} 
           format={props.dateFormat} 
-          selectDateRange={setDateRange}
+          applyDateRange={applySelectedDateRange}
           />
       </div>
     </div>
