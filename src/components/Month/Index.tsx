@@ -9,15 +9,15 @@ import { HoverProps } from "../../types/HoverProps";
 type MonthProps = {
   month: number;
   year: number;
-  selectedDate: DateTime;
-  selectDate: (date: DateTime) => any;
+  selectedDate?: DateTime;
+  startDate: DateTime;
+  endDate?: DateTime;
+  hoverProps: HoverProps;
+  setHoverProps: (hoverProps: HoverProps) => any;
+  selectDateRange: (startDate: DateTime, endDate?: DateTime) => any;
 };
 
 function Month(props: MonthProps) {
-  const [hoverProps, setHoverProps] = useState({
-    hovering: false,
-  } as HoverProps);
-
   var calenderObj = DateTime.fromObject({
     year: props.year,
     month: props.month,
@@ -34,42 +34,15 @@ function Month(props: MonthProps) {
         month={props.month}
         year={props.year}
         selectedDate={props.selectedDate}
-        hoverProps={hoverProps}
-        selectDate={props.selectDate}
+        startDate={props.startDate.startOf("day")}
+        endDate={props.endDate ? props.endDate.startOf("day") : undefined}
+        hoverProps={props.hoverProps}
+        selectDateRange={props.selectDateRange}
       />
     );
   }
 
-  function handleHoverOn(e: any) {
-    if (e.target.dataset.isfiller === "true") return;
-
-    setHoverProps({
-      hovering: true,
-      date: DateTime.fromISO(e.target.dataset.date),
-    });
-
-    e.stopPropagation();
-  }
-
-  function handleHoverOff(e: any) {
-    if (e.target.dataset.isfiller === "true") return;
-
-    setHoverProps({
-      hovering: false,
-    });
-
-    e.stopPropagation();
-  }
-
-  return (
-    <div
-      className="month"
-      onMouseOver={handleHoverOn}
-      onMouseOut={handleHoverOff}
-    >
-      {monthTemplate}
-    </div>
-  );
+  return <div className="month">{monthTemplate}</div>;
 }
 
 export default Month;

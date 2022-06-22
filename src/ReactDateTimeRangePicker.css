@@ -1,6 +1,12 @@
 .rdtrp-container {
-    display: flex;
+    display: inline-flex;
     position: relative;
+    font-size: 12px;
+}
+
+.rdtrp-container .selection-display {
+    font-size: 14px;
+    padding: 4px;
 }
 
 .rdtrp-container .calendar-popup {

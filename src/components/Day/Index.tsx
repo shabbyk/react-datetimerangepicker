@@ -8,15 +8,18 @@ import { HoverProps } from "../../types/HoverProps";
 type DayProps = {
   date: DateTime;
   currMonth: number;
-  selectedDate: DateTime;
+  selectedDate?: DateTime;
   hoverProps: HoverProps;
-  selectDate: (date: DateTime) => any;
+  startDate: DateTime;
+  endDate?: DateTime;
+  selectDateRange: (startDate: DateTime, endDate?: DateTime) => any;
 };
 
 function getClassName(
   currElDate: DateTime,
   currMonth: number,
-  selectedDate: DateTime
+  startDate: DateTime,
+  endDate?: DateTime
 ): string {
   var classNameString = "date-cell";
 
@@ -24,8 +27,11 @@ function getClassName(
     classNameString += " filler-date";
   }
 
-  if (currElDate.toMillis() === selectedDate.toMillis()) {
-    classNameString += " start-date";
+  if (
+    currElDate.toMillis() === startDate.toMillis() ||
+    (endDate && currElDate.toMillis() === endDate.toMillis())
+  ) {
+    classNameString += " selected-date";
   } else {
     classNameString += " default-hover";
   }
@@ -38,22 +44,48 @@ function dayContent(date: DateTime) {
 }
 
 function handleClick(e: any, props: DayProps) {
-  if (props.date.month === props.currMonth) {
-    props.selectDate(props.date.startOf("day"));
+  if (
+    (props.startDate && props.endDate) ||
+    (!props.startDate && !props.endDate)
+  ) {
+    props.selectDateRange(props.date.startOf("day"), undefined);
+  } else if (props.startDate && !props.endDate) {
+    if (
+      props.date.startOf("day").toMillis() <
+      props.startDate.startOf("day").toMillis()
+    ) {
+      props.selectDateRange(props.date.startOf("day"), undefined);
+    } else {
+      props.selectDateRange(props.startDate, props.date.startOf("day"));
+    }
   }
+
   e.stopPropagation();
 }
 
 function Day(props: DayProps) {
-  let classes = getClassName(props.date, props.currMonth, props.selectedDate);
+  let classes = getClassName(
+    props.date,
+    props.currMonth,
+    props.startDate,
+    props.endDate
+  );
 
-  if (props.hoverProps.hovering && props.hoverProps.date) {
-    if (
-      props.date.toMillis() > props.selectedDate.toMillis() &&
-      props.date.toMillis() < props.hoverProps.date.toMillis()
-    ) {
-      classes += " in-range";
-    }
+  /*
+    If endDate is selected, only highligh selected range.
+    Do not highlight on hover.
+    If endDate is not selected, show highligh on hover
+  */
+  if (
+    (props.endDate &&
+      props.date.toMillis() > props.startDate.toMillis() &&
+      props.date.toMillis() < props.endDate.toMillis()) ||
+    (!props.endDate &&
+      props.hoverProps.hovering &&
+      props.date.toMillis() > props.startDate.toMillis() &&
+      props.date.toMillis() < props.hoverProps.date!.toMillis())
+  ) {
+    classes += " in-range";
   }
 
   return (
@@ -61,7 +93,11 @@ function Day(props: DayProps) {
       className={classes}
       data-date={props.date.toISO()}
       data-isfiller={props.date.month !== props.currMonth}
-      onClick={(e) => handleClick(e, props)}
+      onClick={(e) =>
+        props.date.month === props.currMonth
+          ? handleClick(e, props)
+          : e.preventDefault()
+      }
     >
       {dayContent(props.date)}
     </div>

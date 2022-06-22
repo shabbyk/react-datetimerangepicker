@@ -18,7 +18,6 @@ function SecondsPicker(props: SecondsPickerProps) {
   }
   return (
     <div className="seconds-picker-container">
-      <label>ss:</label>
       <select
         defaultValue={props.selected}
         onChange={(e) => props.setSecond(+e.target.value)}

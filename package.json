@@ -16,6 +16,10 @@
     "clean": true,
     "treeshake": true
   },
+  "peerDependencies": {
+    "react": "^18.1.0",
+    "luxon": "^2.4.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
