@@ -1,5 +1,10 @@
 .calendar-layout {
     display: flex;
+    flex-direction: column;
+}
+
+.calendar-layout .calendars {
+    display: flex;
 }
 
 .calendar-layout .left-control-container, .calendar-layout .right-control-container {
