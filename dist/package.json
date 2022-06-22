@@ -1,6 +1,6 @@
 {
   "name": "@shabbyk/react-datetimerangepicker",
-  "version": "1.0.0-beta",
+  "version": "1.0.5-beta",
   "description": "React date time range picker",
   "main": "ReactDateTimeRangePicker.js",
   "scripts": {
