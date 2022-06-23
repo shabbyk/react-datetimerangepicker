@@ -16,11 +16,10 @@ function SelectionPanel(props: SelectionPanelProps) {
   return (
     <div className="selection-panel">
       <div className="display-section">
-        <span className="start-date-label">
-          {props.startDate.toFormat(props.format)}
-        </span>
-        <span className="start-date-label">
-          {props.endDate ? props.endDate.toFormat(props.format) : ""}
+        <span className="selected-date-display">
+          {`${props.startDate.toFormat(props.format)}-${
+            props.endDate && props.endDate.toFormat(props.format)
+          }`}
         </span>
       </div>
       <div className="control-section">

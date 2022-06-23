@@ -12,11 +12,17 @@ type ReactDateTimeRangePickerProps = {
   width: number;
   dateRangePicker: boolean;
   selectedDate: DateTime;
+  onChange: (dateTimeRange: SelectedRange) => any;
 };
 
 function ReactDateTimeRangePicker(props: ReactDateTimeRangePickerProps) {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedRange, setSelectedRange] = useState<SelectedRange>();
+
+  function onRangeChange(range: SelectedRange) {
+    setSelectedRange(range);
+    props.onChange(range);
+  }
 
   return (
     <div className="rdtrp-container">
@@ -33,7 +39,7 @@ function ReactDateTimeRangePicker(props: ReactDateTimeRangePickerProps) {
             closeFn={setShowPopup}
             width={props.width}
             selectedDate={props.selectedDate}
-            setSelectedRange={setSelectedRange}
+            setSelectedRange={onRangeChange}
           />
         </div>
       )}
