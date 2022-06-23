@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@shabbyk/react-datetimerangepicker": "^1.0.5-beta",
+    "@shabbyk/react-datetimerangepicker": "^1.0.8-beta",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -40,5 +40,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "luxon": "^2.4.0"
   }
 }

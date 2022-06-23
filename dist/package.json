@@ -1,7 +1,7 @@
 {
   "name": "@shabbyk/react-datetimerangepicker",
-  "version": "1.0.5-beta",
-  "description": "React date time range picker",
+  "version": "1.0.8-beta",
+  "description": "React date time range picker using luxon",
   "main": "ReactDateTimeRangePicker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
